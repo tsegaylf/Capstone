@@ -9,8 +9,8 @@ using PRS_ServerProject.Model;
 namespace PRS_ServerProject.Migrations
 {
     [DbContext(typeof(PRSCSContext))]
-    [Migration("20190916200031_RequestLineTblInsert1")]
-    partial class RequestLineTblInsert1
+    [Migration("20190916203350_RLineTblAgain5")]
+    partial class RLineTblAgain5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -214,7 +214,7 @@ namespace PRS_ServerProject.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("PRS_ServerProject.Model.Request")
+                    b.HasOne("PRS_ServerProject.Model.Request", "Request")
                         .WithOne("RequestLine")
                         .HasForeignKey("PRS_ServerProject.Model.RequestLine", "RequestId")
                         .OnDelete(DeleteBehavior.Cascade);

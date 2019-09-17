@@ -15,7 +15,7 @@ namespace PRS_ServerProject.Model {
         public virtual DbSet<RequestLine> RequestLines { get; set; }
 
         public PRSCSContext(DbContextOptions<PRSCSContext> context): base(context) {
-
+            
         }
  
         public DbSet<PRS_ServerProject.Model.Request> Request { get; set; }

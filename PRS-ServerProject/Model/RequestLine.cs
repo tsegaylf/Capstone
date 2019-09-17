@@ -9,14 +9,15 @@ namespace PRS_ServerProject.Model {
 
         public int Id { get; set; }
         [Required]
-        public int RequestId { get; set; }
-        [Required]
         public int ProductId { get; set; }
+        [Required]
+        public int RequestId { get; set; }
         [Required]
         public int Quantity { get; set; }
 
+
         public virtual Product Product { get; set; }
-        
+        public virtual Request Request { get; set; }
 
         public RequestLine() {
 

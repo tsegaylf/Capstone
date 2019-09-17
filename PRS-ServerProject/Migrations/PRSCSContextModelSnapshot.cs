@@ -212,7 +212,7 @@ namespace PRS_ServerProject.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("PRS_ServerProject.Model.Request")
+                    b.HasOne("PRS_ServerProject.Model.Request", "Request")
                         .WithOne("RequestLine")
                         .HasForeignKey("PRS_ServerProject.Model.RequestLine", "RequestId")
                         .OnDelete(DeleteBehavior.Cascade);

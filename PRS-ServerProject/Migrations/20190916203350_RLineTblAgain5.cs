@@ -2,7 +2,7 @@
 
 namespace PRS_ServerProject.Migrations
 {
-    public partial class RequestLineTblInsert1 : Migration
+    public partial class RLineTblAgain5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
