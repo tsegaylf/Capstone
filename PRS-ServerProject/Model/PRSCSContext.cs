@@ -17,8 +17,16 @@ namespace PRS_ServerProject.Model {
         public PRSCSContext(DbContextOptions<PRSCSContext> context): base(context) {
             
         }
- 
-        public DbSet<PRS_ServerProject.Model.Request> Request { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
+            modelBuilder.Entity<User>(entity => {
+
+                entity.HasIndex(u => u.Username)
+                .HasName("IDX_Username")
+                    .IsUnique();
+            });
+        }
 
     }
 }

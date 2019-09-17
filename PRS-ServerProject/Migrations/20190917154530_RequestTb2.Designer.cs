@@ -9,8 +9,8 @@ using PRS_ServerProject.Model;
 namespace PRS_ServerProject.Migrations
 {
     [DbContext(typeof(PRSCSContext))]
-    [Migration("20190916203350_RLineTblAgain5")]
-    partial class RLineTblAgain5
+    [Migration("20190917154530_RequestTb2")]
+    partial class RequestTb2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,28 +89,6 @@ namespace PRS_ServerProject.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Request");
-                });
-
-            modelBuilder.Entity("PRS_ServerProject.Model.RequestLine", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<int>("Quantity");
-
-                    b.Property<int>("RequestId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("RequestId")
-                        .IsUnique();
-
-                    b.ToTable("RequestLines");
                 });
 
             modelBuilder.Entity("PRS_ServerProject.Model.User", b =>
@@ -204,19 +182,6 @@ namespace PRS_ServerProject.Migrations
                     b.HasOne("PRS_ServerProject.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PRS_ServerProject.Model.RequestLine", b =>
-                {
-                    b.HasOne("PRS_ServerProject.Model.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("PRS_ServerProject.Model.Request", "Request")
-                        .WithOne("RequestLine")
-                        .HasForeignKey("PRS_ServerProject.Model.RequestLine", "RequestId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

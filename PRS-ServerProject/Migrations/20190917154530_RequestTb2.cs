@@ -3,14 +3,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PRS_ServerProject.Migrations
 {
-    public partial class RequestTbl : Migration
+    public partial class RequestTb2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "Request",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(maxLength: 80, nullable: false),
@@ -21,8 +20,7 @@ namespace PRS_ServerProject.Migrations
                     Total = table.Column<decimal>(type: "decimal(11, 2)", nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Request", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Request_Users_UserId",
@@ -32,16 +30,13 @@ namespace PRS_ServerProject.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Request_UserId",
-                table: "Request",
-                column: "UserId");
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Request");
+            name: "Request");
         }
     }
 }

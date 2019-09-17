@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PRS_ServerProject.Model;
 
 namespace PRS_ServerProject.Migrations
 {
     [DbContext(typeof(PRSCSContext))]
-    partial class PRSCSContextModelSnapshot : ModelSnapshot
+    [Migration("20190917160840_UsernameUnique2")]
+    partial class UsernameUnique2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,10 +146,6 @@ namespace PRS_ServerProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Username")
-                        .IsUnique()
-                        .HasName("IDX_Username");
-
                     b.ToTable("Users");
                 });
 
@@ -211,12 +209,12 @@ namespace PRS_ServerProject.Migrations
             modelBuilder.Entity("PRS_ServerProject.Model.RequestLine", b =>
                 {
                     b.HasOne("PRS_ServerProject.Model.Product", "Product")
-                        .WithMany("RequestLine")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("PRS_ServerProject.Model.Request", "Request")
-                        .WithMany("RequestLine")
+                        .WithMany()
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

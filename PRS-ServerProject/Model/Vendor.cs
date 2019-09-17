@@ -34,6 +34,8 @@ namespace PRS_ServerProject.Model {
 
         public Vendor() {
 
+            //Products = new HashSet<Product>();
+
         }
     }
 }

@@ -9,8 +9,8 @@ using PRS_ServerProject.Model;
 namespace PRS_ServerProject.Migrations
 {
     [DbContext(typeof(PRSCSContext))]
-    [Migration("20190916191801_ProductTblAddFK")]
-    partial class ProductTblAddFK
+    [Migration("20190917161318_ProductUnique")]
+    partial class ProductUnique
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,6 +52,64 @@ namespace PRS_ServerProject.Migrations
                     b.HasIndex("VendorId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("PRS_ServerProject.Model.Request", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DeliveryMode")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(80);
+
+                    b.Property<string>("Justification")
+                        .IsRequired()
+                        .HasMaxLength(80);
+
+                    b.Property<string>("RejectionReason")
+                        .HasMaxLength(80);
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(11, 2)");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Request");
+                });
+
+            modelBuilder.Entity("PRS_ServerProject.Model.RequestLine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<int>("RequestId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("RequestLine");
                 });
 
             modelBuilder.Entity("PRS_ServerProject.Model.User", b =>
@@ -137,6 +195,27 @@ namespace PRS_ServerProject.Migrations
                     b.HasOne("PRS_ServerProject.Model.Vendor", "Vendor")
                         .WithMany()
                         .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PRS_ServerProject.Model.Request", b =>
+                {
+                    b.HasOne("PRS_ServerProject.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PRS_ServerProject.Model.RequestLine", b =>
+                {
+                    b.HasOne("PRS_ServerProject.Model.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PRS_ServerProject.Model.Request", "Request")
+                        .WithMany()
+                        .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

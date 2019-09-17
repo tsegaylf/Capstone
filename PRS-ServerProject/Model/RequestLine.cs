@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace PRS_ServerProject.Model {
+
     public class RequestLine {
 
         public int Id { get; set; }
@@ -19,8 +20,6 @@ namespace PRS_ServerProject.Model {
         public virtual Product Product { get; set; }
         public virtual Request Request { get; set; }
 
-        public RequestLine() {
 
-        }
     }
 }

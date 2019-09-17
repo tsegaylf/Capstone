@@ -9,6 +9,8 @@ namespace PRS_ServerProject.Model {
 
     public class Product {
 
+        //RequestLine = new HashSet<RequestLine>();
+
         public int Id { get; set; }
         [Required]
         [StringLength(30)]
@@ -28,9 +30,11 @@ namespace PRS_ServerProject.Model {
         public int VendorId { get; set; }
 
         public virtual Vendor Vendor { get; set; }
+        public virtual ICollection<RequestLine> RequestLine { get; set; }
 
 
         public Product() {
+
 
         }
     }
