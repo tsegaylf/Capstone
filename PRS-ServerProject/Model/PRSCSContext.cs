@@ -11,11 +11,15 @@ namespace PRS_ServerProject.Model {
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Request> Requests { get; set; }
+        public virtual DbSet<Request> Request { get; set; }
         public virtual DbSet<RequestLine> RequestLines { get; set; }
 
+        
         public PRSCSContext(DbContextOptions<PRSCSContext> context): base(context) {
             
+        }
+
+        public PRSCSContext() {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -27,6 +31,8 @@ namespace PRS_ServerProject.Model {
                     .IsUnique();
             });
         }
+
+
 
     }
 }

@@ -21,38 +21,18 @@ namespace PRS_ServerProject.Controllers
             _context = context;
         }
 
-        // GET: api/Total
-        //[HttpGet("{}")]
-        //public class Request {
-        //    private List<Product> _products = new List<Product>();
-
-        //    public decimal TotalPrice { get; private set; }
-        //    public IReadOnlyCollection<Product> Products => _products;
-
-        //    public void AddProduct(Product product) {
-        //        _products.Add(product);
-        //        TotalPrice += product.Price;
-        //    }
-
-        //    public void RemoveProduct(Product product) {
-        //        _products.Remove(product);
-        //        TotalPrice -= product.Price;
-        //    }
-        //}
-
-
         // GET: api/Requests
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequest()
         {
-            return await _context.Requests.ToListAsync();
+            return await _context.Request.ToListAsync();
         }
 
         // GET: api/Requests/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Request>> GetRequest(int id)
         {
-            var request = await _context.Requests.FindAsync(id);
+            var request = await _context.Request.FindAsync(id);
 
             if (request == null)
             {
@@ -92,11 +72,45 @@ namespace PRS_ServerProject.Controllers
             return NoContent();
         }
 
+
+        // PUT: api/
+        [HttpPut("review {id}")]
+        public async Task<IActionResult> PutStatusReview(int id) {
+            var request = await _context.Request.FindAsync(id);
+            if (request == null) { throw new Exception("No request with that ID."); }
+            request.Status = "Review"; //Request with total <= are set to APPROVED
+            _context.SaveChanges();
+            return NoContent();
+            //var success = Update(request);
+            //if (!success) { throw new Exception("Request update failed!"); }
+        }
+
+        // PUT: api/
+        [HttpPut("approve {id}")]
+        public async Task<IActionResult> PutStatusApproved(int id) {
+            var request = await _context.Request.FindAsync(id);
+            if (request == null) { throw new Exception("No request with that ID."); }
+            request.Status = "Approved"; //Request with total <= are set to APPROVED
+            _context.SaveChanges();
+            return NoContent();
+        }
+
+        // PUT: api/
+        [HttpPut("reject {id}")]
+        public async Task<IActionResult> PutStatusRejected(int id) {
+            var request = await _context.Request.FindAsync(id);
+            if (request == null) { throw new Exception("No request with that ID."); }
+            request.Status = "Rejected"; //Request with total <= are set to APPROVED
+            _context.SaveChanges();
+            return NoContent();
+        }
+
+
         // POST: api/Requests
         [HttpPost]
         public async Task<ActionResult<Request>> PostRequest(Request request)
         {
-            _context.Requests.Add(request);
+            _context.Request.Add(request);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetRequest", new { id = request.Id }, request);
@@ -106,13 +120,13 @@ namespace PRS_ServerProject.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Request>> DeleteRequest(int id)
         {
-            var request = await _context.Requests.FindAsync(id);
+            var request = await _context.Request.FindAsync(id);
             if (request == null)
             {
                 return NotFound();
             }
 
-            _context.Requests.Remove(request);
+            _context.Request.Remove(request);
             await _context.SaveChangesAsync();
 
             return request;
@@ -120,7 +134,7 @@ namespace PRS_ServerProject.Controllers
 
         private bool RequestExists(int id)
         {
-            return _context.Requests.Any(e => e.Id == id);
+            return _context.Request.Any(e => e.Id == id);
         }
     }
 }
