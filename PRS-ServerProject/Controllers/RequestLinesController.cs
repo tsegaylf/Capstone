@@ -11,14 +11,41 @@ namespace PRS_ServerProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RequestLinesController : ControllerBase
-    {
+    public class RequestLinesController : ControllerBase {
         private readonly PRSCSContext _context;
 
-        public RequestLinesController(PRSCSContext context)
-        {
+        public RequestLinesController(PRSCSContext context) {
             _context = context;
         }
+
+        //private void ReCalRequestTotal(int requestId) {
+        //    var request = _context.Request;
+        //    if (request == null) {
+        //        find(requestId);
+        //        throw new Exception("");
+        //    }
+        //    request.Total = _context.RequestLines; 
+        //    .where(1 => 1.Request.Id == requestId);
+        //    .sum(1 => 1.Product.Price * 1.Quantity);
+        //    _context.SaveChanges();
+        //}
+
+        //// GET Total
+        //// GET: api/RequestLines
+        //[HttpGet]
+        ////public async Task<ActionResult<IEnumerable<RequestLine>>> GetRequestTotal() {
+        //private void RecalRequestTotal(int requestId) {
+        //    var requests = _context.Request;
+        //    if (requests == null) {
+
+        //        throw new Exception("");
+        //    }
+        //    requests.Total = _context.RequestLines,
+        //           .where(1 => 1.Request.Id == requestId),
+        //            .sum(1 => 1.Product.Price* 1.Quantity),
+        //    _context.SaveChanges();
+        //}
+
 
         // GET: api/RequestLines
         [HttpGet]

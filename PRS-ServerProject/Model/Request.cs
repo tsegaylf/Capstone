@@ -10,9 +10,10 @@ namespace PRS_ServerProject.Model {
 
     public class Request {
 
-        public virtual User User { get; set; }
-        public virtual ICollection<RequestLine> RequestLine { get; set; }
+        public Request() {
+            //RequestLines = new HashSet<RequestLines>();
 
+        }
 
         public int Id { get; set; }
         [Required]
@@ -35,8 +36,9 @@ namespace PRS_ServerProject.Model {
         [Required]
         public int UserId { get; set; }
 
-        public Request() {
 
-        }
+        public virtual User User { get; set; }
+        public virtual ICollection<RequestLine> RequestLine { get; set; }
+ 
     }
 }
