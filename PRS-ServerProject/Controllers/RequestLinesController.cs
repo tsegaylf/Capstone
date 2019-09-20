@@ -18,34 +18,14 @@ namespace PRS_ServerProject.Controllers
             _context = context;
         }
 
-        //private void ReCalRequestTotal(int requestId) {
-        //    var request = _context.Request;
-        //    if (request == null) {
-        //        find(requestId);
-        //        throw new Exception("");
-        //    }
-        //    request.Total = _context.RequestLines; 
-        //    .where(1 => 1.Request.Id == requestId);
-        //    .sum(1 => 1.Product.Price * 1.Quantity);
-        //    _context.SaveChanges();
-        //}
-
-        //// GET Total
-        //// GET: api/RequestLines
-        //[HttpGet]
-        ////public async Task<ActionResult<IEnumerable<RequestLine>>> GetRequestTotal() {
-        //private void RecalRequestTotal(int requestId) {
-        //    var requests = _context.Request;
-        //    if (requests == null) {
-
-        //        throw new Exception("");
-        //    }
-        //    requests.Total = _context.RequestLines,
-        //           .where(1 => 1.Request.Id == requestId),
-        //            .sum(1 => 1.Product.Price* 1.Quantity),
-        //    _context.SaveChanges();
-        //}
-
+        private void ReCal (int requestId) {
+            var request = _context.Request.Find(requestId);
+            if (request == null) {
+                throw new Exception("Request Line instant must not be null");
+            }
+            request.Total = _context.RequestLines.Where(i => i.RequestId == i.RequestId).Sum(i => i.Product.Price * i.Quantity);
+            _context.SaveChanges();
+        }
 
         // GET: api/RequestLines
         [HttpGet]

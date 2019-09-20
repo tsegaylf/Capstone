@@ -20,7 +20,7 @@ namespace PRS_ServerProject.Model {
         public string Name { get; set; }
         [Required]
         [Column(TypeName = "decimal(11, 2)")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         [Required]
         [StringLength(30)]
         public string Unit { get; set; }
