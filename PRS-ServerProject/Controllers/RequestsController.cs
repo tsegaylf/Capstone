@@ -28,13 +28,13 @@ namespace PRS_ServerProject.Controllers
             return await _context.Request.ToListAsync();
         }
 
-        //private void GetRequestForReviewer(int userId) {
-        //    var request = _context.Request.Find(userId);
-        //    if (request == null) {
-        //        throw new Exception("Instant must not be null");
-        //    }
-        //    request.Status = Where(r => r.Status == "Review" && r.UserId != userId);
-        //}
+        private void GetRequestForReviewer(int userId) {
+            var request = _context.Request.Find(userId);
+            if (request == null) {
+                throw new Exception("Instant must not be null");
+            }
+            _context.Request.Where(r => r.Status == "Review" && r.UserId != userId);
+        }
 
         // GET: api/Requests/5
         [HttpGet("{id}")]
